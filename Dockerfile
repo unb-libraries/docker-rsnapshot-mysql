@@ -7,6 +7,7 @@ LABEL vcs-url="https://github.com/unb-libraries/docker-rsnapshot-mysql"
 LABEL vendor="University of New Brunswick Libraries"
 
 ENV MYSQL_HOSTNAME localhost
+ENV MYSQL_PORT 3306
 ENV MYSQL_USER_NAME root
 ENV MYSQL_USER_PASSWORD changeme
 
