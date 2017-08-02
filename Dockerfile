@@ -21,9 +21,9 @@ RUN apk --update add rsnapshot mysql-client && \
 COPY ./conf/rsnapshot/rsnapshot.conf /etc/rsnapshot.conf
 
 COPY scripts /scripts
-RUN cp /scripts/cron/mysql_backup_hourly.sh /etc/periodic/hourly/ && \
-  cp /scripts/cron/mysql_backup_daily.sh /etc/periodic/daily/ && \
-  cp /scripts/cron/mysql_backup_weekly.sh /etc/periodic/weekly/ && \
-  cp /scripts/cron/mysql_backup_monthly.sh /etc/periodic/monthly/
+RUN cp /scripts/cron/mysql_backup_hourly.sh /etc/periodic/hourly/mysql_backup_hourly && \
+  cp /scripts/cron/mysql_backup_daily.sh /etc/periodic/daily/mysql_backup_daily && \
+  cp /scripts/cron/mysql_backup_weekly.sh /etc/periodic/weekly/mysql_backup_weekly && \
+  cp /scripts/cron/mysql_backup_monthly.sh /etc/periodic/monthly/mysql_backup_monthly
 
 ENTRYPOINT ["/scripts/run.sh"]
