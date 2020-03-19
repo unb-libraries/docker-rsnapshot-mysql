@@ -13,6 +13,8 @@ $MYDUMPER \
   --outputdir=$TMP_DIR \
   --rows=100000 \
   --compress \
+  --events \
+  --trx-consistency-only \
   --build-empty-files \
   --compress-protocol
 
