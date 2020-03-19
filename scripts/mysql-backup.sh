@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 MYDUMPER=/usr/bin/mydumper
-ROWS_PER_FILE='500000'
+ROWS_PER_FILE='100000'
 
 TMP_DIR=$(mktemp -d -t sqldumps-XXXXXXXXXX)
 
@@ -11,7 +11,7 @@ $MYDUMPER \
   --password=MYSQL_USER_PASSWORD \
   --regex='^(?!(Database|information_schema|performance_schema|sys|mysql))$' \
   --outputdir=$TMP_DIR \
-  --rows=100000 \
+  --rows=$ROWS_PER_FILE \
   --compress \
   --events \
   --routines \
