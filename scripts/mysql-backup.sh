@@ -14,6 +14,7 @@ $MYDUMPER \
   --rows=100000 \
   --compress \
   --events \
+  --routines \
   --trx-consistency-only \
   --build-empty-files \
   --compress-protocol
