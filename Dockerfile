@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:stretch-slim
 MAINTAINER Jacob Sanford <jsanford_at_unb.ca>
 
 LABEL ca.unb.lib.daemon="mysql"
@@ -17,10 +17,10 @@ RUN apt-get update && apt-get --yes install \
     curl \
     libglib2.0-dev \
     coreutils \
-    mariadb-client-10.3 \
+    mysql-client \
     rsnapshot && \
   rm -rf /var/lib/apt/lists/* && \
-  curl -sLO https://github.com/maxbube/mydumper/releases/download/v0.9.5/mydumper_0.9.5-2.jessie_amd64.deb && dpkg -i mydumper_0.9.5-2.jessie_amd64.deb && rm -f mydumper_0.9.5-2.jessie_amd64.deb && \
+  curl -sLO https://github.com/maxbube/mydumper/releases/download/v0.9.5/mydumper_0.9.5-2.stretch_amd64.deb && dpkg -i mydumper_0.9.5-2.stretch_amd64.deb && rm -f mydumper_0.9.5-2.stretch_amd64.deb && \
   touch /var/log/rsnapshot.log && \
   mkdir -p ${MYSQL_DUMP_LOCATION}
 
