@@ -15,6 +15,7 @@ ENV MYSQL_DUMP_LOCATION /app/mysql_dumps
 
 RUN apt-get update && apt-get --yes install \
     curl \
+    libglib2.0-dev \
     mktemp \
     mysql-client \
     rsnapshot && \
