@@ -14,9 +14,10 @@ ENV MYSQL_USER_PASSWORD changeme
 ENV MYSQL_DUMP_LOCATION /app/mysql_dumps
 
 RUN apt-get update && apt-get --yes install \
-    curl \
-    libglib2.0-dev \
     coreutils \
+    curl \
+    libatomic1 \
+    libglib2.0-dev \
     mysql-client \
     rsnapshot && \
   rm -rf /var/lib/apt/lists/* && \
