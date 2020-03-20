@@ -1,4 +1,4 @@
-FROM debian:jessie-slim
+FROM debian:bullseye-slim
 MAINTAINER Jacob Sanford <jsanford_at_unb.ca>
 
 LABEL ca.unb.lib.daemon="mysql"
@@ -16,8 +16,8 @@ ENV MYSQL_DUMP_LOCATION /app/mysql_dumps
 RUN apt-get update && apt-get --yes install \
     curl \
     libglib2.0-dev \
-    mktemp \
-    mysql-client \
+    coreutils \
+    mariadb-client-10.3 \
     rsnapshot && \
   rm -rf /var/lib/apt/lists/* && \
   curl -sLO https://github.com/maxbube/mydumper/releases/download/v0.9.5/mydumper_0.9.5-2.jessie_amd64.deb && dpkg -i mydumper_0.9.5-2.jessie_amd64.deb && rm -f mydumper_0.9.5-2.jessie_amd64.deb && \
