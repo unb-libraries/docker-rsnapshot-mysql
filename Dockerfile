@@ -13,22 +13,23 @@ ENV MYSQL_USER_PASSWORD changeme
 
 ENV MYSQL_DUMP_LOCATION /app/mysql_dumps
 
-RUN apt-get update && \
-  apt-get --yes install \
-    rsnapshot \
-    mysql-client \
+RUN apt-get update && apt-get --yes install \
+    curl \
     mktemp \
-    mydumper && \
+    mydumper \
+    mysql-client \
+    rsnapshot && \
+  rm -rf /var/lib/apt/lists/* && \
+  curl -sLO https://github.com/maxbube/mydumper/releases/download/v0.9.5/mydumper_0.9.5-2.jessie_amd64.deb && dpkg -i mydumper_0.9.5-2.jessie_amd64.deb && rm -f mydumper_0.9.5-2.jessie_amd64.deb && \
   touch /var/log/rsnapshot.log && \
-  ls /etc/cron* && \
   mkdir -p ${MYSQL_DUMP_LOCATION}
 
 COPY ./conf/rsnapshot/rsnapshot.conf /etc/rsnapshot.conf
-
 COPY scripts /scripts
-RUN cp /scripts/cron/mysql_backup_hourly.sh /etc/cron.hourly/mysql_backup_hourly && \
-  cp /scripts/cron/mysql_backup_daily.sh /etc/cron.daily/mysql_backup_daily && \
-  cp /scripts/cron/mysql_backup_weekly.sh /etc/cron.weekly/mysql_backup_weekly && \
-  cp /scripts/cron/mysql_backup_monthly.sh /etc/cron.monthly/mysql_backup_monthly
+
+RUN cp /scripts/cron/mysql_backup_hourly.sh /etc/cron.hourly/ && \
+  cp /scripts/cron/mysql_backup_daily.sh /etc/cron.daily/ && \
+  cp /scripts/cron/mysql_backup_weekly.sh /etc/cron.weekly/ && \
+  cp /scripts/cron/mysql_backup_monthly.sh /etc/cron.monthly/
 
 ENTRYPOINT ["/scripts/run.sh"]
