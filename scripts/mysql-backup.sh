@@ -23,7 +23,7 @@ for DB in $DATABASES; do
     --events \
     --routines \
     --build-empty-files \
-    --verbose=1
+    --verbose=1 \
     --compress-protocol
 done
 
