@@ -8,4 +8,4 @@ do
 done
 
 echo "[i] run.sh - Waiting for cron"
-tail -f /var/log/rsnapshot.log
+cron && tail -f /var/log/rsnapshot.log
