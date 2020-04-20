@@ -25,6 +25,7 @@ for DB in $DATABASES; do
     --build-empty-files \
     --verbose=1 \
     --compress-protocol
+  cat "$OUTPUT_DIR/metadata"
 done
 
 mv $TMP_DIR ./mysql
