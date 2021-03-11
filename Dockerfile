@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.13
 MAINTAINER Jacob Sanford <jsanford_at_unb.ca>
 
 LABEL ca.unb.lib.daemon="nginx"
@@ -10,7 +10,6 @@ ENV MYSQL_HOSTNAME localhost
 ENV MYSQL_PORT 3306
 ENV MYSQL_USER_NAME root
 ENV MYSQL_USER_PASSWORD changeme
-
 ENV MYSQL_DUMP_LOCATION /app/mysql_dumps
 
 RUN apk --update add rsnapshot mysql-client && \
@@ -19,11 +18,6 @@ RUN apk --update add rsnapshot mysql-client && \
   mkdir -p ${MYSQL_DUMP_LOCATION}
 
 COPY ./conf/rsnapshot/rsnapshot.conf /etc/rsnapshot.conf
-
 COPY scripts /scripts
-RUN cp /scripts/cron/mysql_backup_hourly.sh /etc/periodic/hourly/mysql_backup_hourly && \
-  cp /scripts/cron/mysql_backup_daily.sh /etc/periodic/daily/mysql_backup_daily && \
-  cp /scripts/cron/mysql_backup_weekly.sh /etc/periodic/weekly/mysql_backup_weekly && \
-  cp /scripts/cron/mysql_backup_monthly.sh /etc/periodic/monthly/mysql_backup_monthly
 
 ENTRYPOINT ["/scripts/run.sh"]

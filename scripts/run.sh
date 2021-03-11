@@ -7,5 +7,5 @@ do
   fi
 done
 
-echo "[i] run.sh - Waiting for cron"
-tail -f /var/log/rsnapshot.log
+FREQUENCY=${1:-daily}
+/usr/bin/rsnapshot -c /etc/rsnapshot.conf $FREQUENCY
